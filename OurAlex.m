@@ -10,7 +10,7 @@ filename = 'D:\Mela\ALEX_NASZ\DominikaSulot\AFM obrazy DNA\DNA\080409.004';
 figure; 
 imagesc(img);
 c = AdvancedColormap('AFM');
-colormap(c);
+colormap('pink');
 hold on;
 
 % liczba punktów jakie u¿ytkownik zaznacza
@@ -46,7 +46,7 @@ img_crop = imcrop(img, r);
 % wyœwietlanie przyciêtego obrazu w nowym oknie
 figure; imagesc(img_crop); 
 c = AdvancedColormap('AFM');
-colormap(c);
+colormap('pink');
 hold on;
 
 % wybieranie punktu pocz¹tkowego i koñcowego DNA
@@ -69,24 +69,22 @@ xk = x(2); yk = y(2);
 xs = xp;
 ys = yp;
 
-while xs(end) ~= xk && ys(end) ~= yk
-    pa1 = img_crop(xs(end)+1, ys(end));
-    pa2 = img_crop(xs(end)+1, ys(end)-1);
-    pa3 = img_crop(xs(end), ys(end)-1);
-    pa4 = img_crop(xs(end)-1, ys(end)-1);
-    pa5 = img_crop(xs(end)-1, ys(end));
-    pa6 = img_crop(xs(end)+1, ys(end)+1); 
-    pa7 = img_crop(xs(end)-1, ys(end)+1);
-    pa8 = img_crop(xs(end), ys(end)+1);
-    points_around = [pa1, pa2, pa3, pa4, pa5, pa6, pa7, pa8];
-    
-    [val, ind] = max(points_around);
-    
-    
+% while xs(end) ~= xk || ys(end) ~= yk
+for i = 1:5000
+    % punkty dooko³a zaznaczonego punktu
+    max_point = findMaxPoint(xs, ys, img_crop);
+    xs = [xs, max_point(1)];
+    ys = [ys, max_point(2)];
 end
 
+[size_y, ~] = size(img_crop);
 
-
+figure; imagesc(img_crop); 
+c = AdvancedColormap('AFM');
+colormap('pink');
+hold on;
+plot(xs,ys,'.r', 'MarkerSize', 20)
+hold off
 
 % delete(h); %deletes plotted items from current plot
 % refresh(h)
