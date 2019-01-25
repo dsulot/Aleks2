@@ -5,7 +5,8 @@ close all
 % wczytanie pliku
 filename = 'D:\Mela\ALEX_NASZ\DominikaSulot\AFM obrazy DNA\DNA\080409.004';
 [img, header, errmsg] = readImage(filename);
-
+% img = img./max(img);
+img=(img-min(img(:)))/(max(img(:))-min(img(:)));
 % wyœwietlanie obrazu AFM
 figure; 
 imagesc(img);
@@ -70,7 +71,7 @@ xs = xp;
 ys = yp;
 
 % while xs(end) ~= xk || ys(end) ~= yk
-for i = 1:5000
+for i = 1:20
     % punkty dooko³a zaznaczonego punktu
     max_point = findMaxPoint(xs, ys, img_crop);
     xs = [xs, max_point(1)];
