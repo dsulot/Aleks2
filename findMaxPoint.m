@@ -8,21 +8,67 @@ function [max_point] = findMaxPoint(xs, ys, img_crop)
  % wczeœniej
 
     pa1_ind = [xs(end)+1, ys(end)];
-    pa1 = img_crop(pa1_ind(2), pa1_ind(1));
+    if pa1_ind(1) > size(img_crop, 2) || pa1_ind(2) > size(img_crop, 1) ...
+            || pa1_ind(1) <= 0 || pa1_ind(2) <= 0
+        pa1 = 0;
+    else
+        pa1 = img_crop(pa1_ind(2), pa1_ind(1));
+    end
+    
     pa2_ind = [xs(end)+1, ys(end)-1];
-    pa2 = img_crop(pa2_ind(2), pa2_ind(1));
+    if pa2_ind(1) > size(img_crop, 2) || pa2_ind(2) > size(img_crop, 1) ...
+             || pa2_ind(1) <= 0 || pa2_ind(2) <= 0
+        pa2 = 0;
+    else
+        pa2 = img_crop(pa2_ind(2), pa2_ind(1));
+    end
+    
     pa3_ind = [xs(end), ys(end)-1];
-    pa3 = img_crop(pa3_ind(2), pa3_ind(1));
+    if pa3_ind(1) > size(img_crop, 2) || pa3_ind(2) > size(img_crop, 1) ...
+             || pa3_ind(1) <= 0 || pa3_ind(2) <= 0
+        pa3 = 0;
+    else
+        pa3 = img_crop(pa3_ind(2), pa3_ind(1));
+    end
+        
     pa4_ind = [xs(end)-1, ys(end)-1];
-    pa4 = img_crop(pa4_ind(2), pa4_ind(1));
+    if pa4_ind(1) > size(img_crop, 2) || pa4_ind(2) > size(img_crop, 1) ...
+             || pa4_ind(1) <= 0 || pa4_ind(2) <= 0
+        pa4 = 0;
+    else
+        pa4 = img_crop(pa4_ind(2), pa4_ind(1));
+    end
+        
     pa5_ind = [xs(end)-1, ys(end)];
-    pa5 = img_crop(pa5_ind(2), pa5_ind(1));
+    if pa5_ind(1) > size(img_crop, 2) || pa5_ind(2) > size(img_crop, 1) ...
+             || pa5_ind(1) <= 0 || pa5_ind(2) <= 0
+        pa5 = 0;
+    else
+        pa5 = img_crop(pa5_ind(2), pa5_ind(1));
+    end
+        
     pa6_ind = [xs(end)+1, ys(end)+1];
-    pa6 = img_crop(pa6_ind(2), pa6_ind(1)); 
+    if pa6_ind(1) > size(img_crop, 2) || pa6_ind(2) > size(img_crop, 1) ...
+             || pa6_ind(1) <= 0 || pa6_ind(2) <= 0
+        pa6 = 0;
+    else
+        pa6 = img_crop(pa6_ind(2), pa6_ind(1)); 
+    
     pa7_ind = [xs(end)-1, ys(end)+1];
-    pa7 = img_crop(pa7_ind(2), pa7_ind(1));
+    if pa7_ind(1) > size(img_crop, 2) || pa7_ind(2) > size(img_crop, 1) ...
+             || pa7_ind(1) <= 0 || pa7_ind(2) <= 0
+        pa7 = 0;
+    else
+        pa7 = img_crop(pa7_ind(2), pa7_ind(1));
+    end
+    
     pa8_ind = [xs(end), ys(end)+1];
-    pa8 = img_crop(pa8_ind(2), pa8_ind(1));
+    if pa8_ind(1) > size(img_crop, 2) || pa8_ind(2) > size(img_crop, 1) ...
+             || pa8_ind(1) <= 0 || pa8_ind(2) <= 0
+        pa8 = 0;
+    else
+        pa8 = img_crop(pa8_ind(2), pa8_ind(1));
+    end
     
     % wektor punktów
     points_around = [pa1, pa2, pa3, pa4, pa5, pa6, pa7, pa8];
@@ -53,6 +99,7 @@ function [max_point] = findMaxPoint(xs, ys, img_crop)
             end
         end
     end
+
 
 end
 

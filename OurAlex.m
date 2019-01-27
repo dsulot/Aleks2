@@ -71,7 +71,7 @@ xs = xp;
 ys = yp;
 
 % while xs(end) ~= xk || ys(end) ~= yk
-for i = 1:50
+for i = 1:150
     % punkty dooko³a zaznaczonego punktu
     max_point = findMaxPoint(xs, ys, img_crop);
     xs = [xs, max_point(1)];
