@@ -3,7 +3,7 @@ clc
 close all
 
 % wczytanie pliku
-filename = 'D:\Mela\ALEX_NASZ\DominikaSulot\AFM obrazy DNA\DNA\080409.004';
+filename = 'C:\Users\Mela\Desktop\ALEX_NASZ\DominikaSulot\AFM obrazy DNA\DNA\080409.003';
 [img, header, errmsg] = readImage(filename);
 % img = img./max(img);
 img=(img-min(img(:)))/(max(img(:))-min(img(:)));
@@ -43,7 +43,7 @@ else
     end
 end
 img_crop = imcrop(img, r);
-
+img_crop = im2double(img_crop);
 % wyœwietlanie przyciêtego obrazu w nowym oknie
 figure; imagesc(img_crop); 
 c = AdvancedColormap('AFM');
@@ -71,7 +71,7 @@ xs = xp;
 ys = yp;
 
 % while xs(end) ~= xk || ys(end) ~= yk
-for i = 1:20
+for i = 1:50
     % punkty dooko³a zaznaczonego punktu
     max_point = findMaxPoint(xs, ys, img_crop);
     xs = [xs, max_point(1)];
