@@ -3,7 +3,7 @@ clc
 close all
 
 % wczytanie pliku
-filename = 'C:\Users\Mela\Desktop\ALEX_NASZ\DominikaSulot\AFM obrazy DNA\DNA\080409.003';
+filename = '010807.003';
 [img, header, errmsg] = readImage(filename);
 % img = img./max(img);
 img=(img-min(img(:)))/(max(img(:))-min(img(:)));
@@ -71,11 +71,17 @@ xs = xp;
 ys = yp;
 
 % while xs(end) ~= xk || ys(end) ~= yk
-for i = 1:150
+while 1
     % punkty dooko³a zaznaczonego punktu
     max_point = findMaxPoint(xs, ys, img_crop);
     xs = [xs, max_point(1)];
     ys = [ys, max_point(2)];
+    if EndCondition(xk,yk, max_point(1), max_point(2)) == "true"
+        % czasami przez to sie blokuje bo nie dochodzi to jego konca nigdy
+        % ;/
+        break;
+    end
+    
 end
 
 [size_y, ~] = size(img_crop);
