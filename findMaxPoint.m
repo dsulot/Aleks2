@@ -1,4 +1,4 @@
-function [max_point] = findMaxPoint(xs, ys, img_crop)
+function [max_point] = findMaxPoint(xs, ys, img_crop, zakazany)
  % Funkcja do znajdowania s¹siaduj¹cego punktu o najwiêkszej wartoœci
  % Arg. wej.: 
  % xs, ys - wspó³rzêdne x i y punktu pocz¹tkowego
@@ -6,8 +6,15 @@ function [max_point] = findMaxPoint(xs, ys, img_crop)
  % Arg. wyj.:
  % max_point - wspó³rzêdne punktu o najwiêkszej wartoœci, nie wystêpuj¹cego
  % wczeœniej
-
-    pa1_ind = [xs(end)+1, ys(end)];
+ if ~exist('zakazany', 'var')
+    zakazany = [0 0];
+end
+ max_point = [0 0];
+ 
+ 
+      
+     pa1_ind = [xs(end)+1, ys(end)];
+         
     if pa1_ind(1) > size(img_crop, 2) || pa1_ind(2) > size(img_crop, 1) ...
             || pa1_ind(1) <= 0 || pa1_ind(2) <= 0
         pa1 = 0;
@@ -75,7 +82,7 @@ function [max_point] = findMaxPoint(xs, ys, img_crop)
 
     % zmienna mówi¹ca czy znaleziony punkt wystêpowa³ ju¿ wczeœniej
     is_changed = 1;
-    
+    count = 0;
     % pêtla szukaj¹ca punktu, który nie wsytêpowa³ wczeœniej
     while is_changed == 1
         
@@ -94,11 +101,32 @@ function [max_point] = findMaxPoint(xs, ys, img_crop)
             for i = 1:length(prev_points(:,1))
                 if max_point(1) == prev_points(i, 1) && max_point(2) == prev_points(i, 2)
                     points_around(ind) = NaN;
+                    count = count+1;
                     is_changed = 1;
                 end
             end
         end
+        if count > 10
+             warning("Problem with finding path through two given points");
+            max_point = [0 0];
+            break;
+        end
+        
+         if is_changed == 0
+         if ~isempty(zakazany)
+             for i = 1:length(zakazany(1,:))
+                if max_point(1) == zakazany(1,i) && max_point(2) == zakazany(2,i)
+                    points_around(ind) = NaN;
+                    is_changed = 1;
+                end
+             end
+         end
     end
+        
+    end
+    
+   
+    
 
 
 end

@@ -67,6 +67,8 @@ elseif nimages>2
         case 'Cancel'
             reply = 0;
     end
+end
+    
     
 
 if reply==0

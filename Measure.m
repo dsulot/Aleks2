@@ -1,4 +1,4 @@
-function [img_crop, xs,ys] = Measure(img, cmap)
+function [img_crop, xs,ys, DNALength] = Measure(img, cmap, header)
 % OURALEKS in funtion
 
 
@@ -65,30 +65,33 @@ xk = x(2); yk = y(2);
 xs = xp;
 ys = yp;
 
-% while xs(end) ~= xk || ys(end) ~= yk
-while 1
-    % punkty dooko³a zaznaczonego punktu
-    max_point = findMaxPoint(xs, ys, img_crop);
-    xs = [xs, max_point(1)];
-    ys = [ys, max_point(2)];
-    if EndCondition(xk,yk, max_point(1), max_point(2)) == "true"
-        % czasami przez to sie blokuje bo nie dochodzi to jego konca nigdy
-        % ;/
-        break;
-    end
-    
+
+global kierunekx kieruneky
+
+if xp-xk > 0
+    kierunekx = 1; %dodatni
+else
+    kierunekx = 0; %ujemny
 end
 
-%[size_y, ~] = size(img_crop);
+if yp-yk > 0
+    kieruneky = 1; %dodatni
+else
+    kieruneky = 0; %ujemny
+end
 
-%figure; imagesc(img_crop); 
-%c = AdvancedColormap('AFM');
-%colormap('pink');
-%hold on;
-%plot(xs,ys,'.r', 'MarkerSize', 20)
-%hold off
 
-% delete(h); %deletes plotted items from current plot
+[xs,ys] = FindPath(xs,ys,xk,yk,img_crop,kierunekx, kieruneky);
+
+
+global H I
+H = header;
+I = img;
+
+[X,Y] = ind2nm(xs,ys);
+DNALength = llength(X,Y);
+%delete(h); %deletes plotted items from current plotX [] 
 % refresh(h)
+
 end
 
