@@ -1,6 +1,5 @@
 function [ img, header, errmsg ] = readImage( filename )
-%readImage Summary of this function goes here
-%   Detailed explanation goes here
+%reakImage - read images 
 global reply
 reply = 0;
 header_size_org = 2048;

@@ -1,5 +1,6 @@
 function [img_crop, xs,ys, DNALength] = Measure(img, cmap, header)
-% OURALEKS in funtion
+% OURALEKS in funtion 
+% it also measure DNA length 
 
 
 c=cmap;

@@ -1,6 +1,6 @@
 function [xs,ys] = FindPath(xs,ys,xk,yk,img_crop,kierunekx, kieruneky, zakazany)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%FindPath:
+%function to find the brightest path between points
 
 if ~exist('zakazany', 'var')
     zakazany = [];
